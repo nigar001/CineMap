@@ -4,6 +4,9 @@ import httpx
 from fastapi import FastAPI, HTTPException, Query, status
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
+import os
+from dotenv import load_dotenv
+
 
 app = FastAPI(
     title="CineMap - Real-Time Film Location & Travel Recon API",
@@ -13,7 +16,8 @@ app = FastAPI(
 
 TMDB_SEARCH_URL = "https://api.themoviedb.org/3/search/movie"
 TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
-TMDB_API_KEY = "3c5474a074487addc9443cca9e3f4a49"
+load_dotenv()
+TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 
 class TravelSeason(str, Enum):
     SPRING = "Spring (March - May)"
